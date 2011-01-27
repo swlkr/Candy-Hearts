@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="imageHeartArray">
+    	<item>@drawable/allyours</item>
+    	<item>@drawable/asl</item>
+    	<item>@drawable/bemine</item>
+    	<item>@drawable/biteme</item>
+    	<item>@drawable/brb</item>
+    	<item>@drawable/emailme2</item>
+    	<item>@drawable/ido</item>
+    	<item>@drawable/imme</item>
+    	<item>@drawable/imyours</item>
+    	<item>@drawable/kissme</item>
+    	<item>@drawable/letsdance</item>
+    	<item>@drawable/lmao</item>
+    	<item>@drawable/lol</item>
+    	<item>@drawable/loveyou</item>
+    	<item>@drawable/mygirl</item>
+    	<item>@drawable/myguy</item>
+    	<item>@drawable/mylove</item>
+    	<item>@drawable/onelove</item>
+    	<item>@drawable/sofine</item>
+    	<item>@drawable/truelove</item>
+    	<item>@drawable/urcute</item>
+    	<item>@drawable/urmine</item>
+    	<item>@drawable/ymmv</item>
+    </array>
+</resources>
