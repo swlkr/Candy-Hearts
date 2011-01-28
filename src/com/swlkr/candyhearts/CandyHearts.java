@@ -3,11 +3,12 @@ package com.swlkr.candyhearts;
 import java.util.Random;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-//import android.graphics.drawable.TransitionDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -16,57 +17,30 @@ import android.widget.ImageView;
 public class CandyHearts extends Activity implements AccelerometerListener {
 	
 	private static Context _context;
-	//private int forwardsCounter = 0, backwardsCounter = 0;
-	//private boolean wasMovingForward = true;
 	private ImageView candyHeartImageView;
 	private Random generator;
 	private TypedArray heartArray;
-	private Animation hyperspaceJump;
+	private Animation hyperspaceJump, fadeIn, fadeOut, enterStageRight, enterStageLeft, hyperspaceJumpIn;
 	private int lastRandomInt;
+	private static DisplayMetrics displayMetrics;
+	private static PowerManager pm;
 
     /**
      * onShake callback 
      */
 	public void onShake(float force) {
 		
-		candyHeartImageView.startAnimation(hyperspaceJump);
+		int randomInt = generator.nextInt(3);
+		pm.userActivity(System.currentTimeMillis(), true);
 		
-		//if(hyperspaceJump.hasEnded())
-			
+		//if(randomInt == 0)
+			//candyHeartImageView.startAnimation(hyperspaceJump);
 		
-		/*TransitionDrawable drawable = (TransitionDrawable) candyHeart.getDrawable();		
-
-		if(backwardsCounter > forwardsCounter || forwardsCounter == 2) {
-			// Moving backwards
-			drawable.reverseTransition(500);
-			wasMovingForward = false;
-		}
-		else if(forwardsCounter > backwardsCounter) {
-			// Moving forwards
-			drawable.startTransition(500);
-			wasMovingForward = true;
-		}
-		else if(forwardsCounter == backwardsCounter) {
-			// Extra boolean flag that remembers the last state
-			if(wasMovingForward) {
-				drawable.startTransition(500);
-			}
-			else {
-				drawable.reverseTransition(500);
-			}
-		}
+		if(randomInt == 1)		
+			candyHeartImageView.startAnimation(enterStageLeft);
 		
-		backwardsCounter = forwardsCounter;
-		
-		if(wasMovingForward)
-			forwardsCounter++;
-		else
-			forwardsCounter--;
-		
-		/*
-		
-
-		*/
+		if(randomInt == 2)
+			candyHeartImageView.startAnimation(fadeOut);
 	}
 	
 	/** Called when the activity is first created. */
@@ -78,8 +52,16 @@ public class CandyHearts extends Activity implements AccelerometerListener {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         candyHeartImageView = (ImageView)findViewById(R.id.image_view);
         generator = new Random();
-        heartArray = this.getResources().obtainTypedArray(R.array.imageHeartArray);
+        heartArray = this.getResources().obtainTypedArray(R.array.hearts);
         hyperspaceJump = AnimationUtils.loadAnimation(this, R.anim.hyperspace_jump);
+        hyperspaceJumpIn = AnimationUtils.loadAnimation(this, R.anim.hyperspace_jump_in);
+        fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        enterStageLeft = AnimationUtils.loadAnimation(this, R.anim.enter_stage_left);
+        enterStageRight = AnimationUtils.loadAnimation(this, R.anim.enter_stage_right);
+        displayMetrics = new DisplayMetrics();
+        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
     }
 
     protected void onResume() {
@@ -88,7 +70,7 @@ public class CandyHearts extends Activity implements AccelerometerListener {
     		AccelerometerManager.startListening(this);
     	}
     	
-    	hyperspaceJump.setAnimationListener(new AnimationListener() {
+    	fadeOut.setAnimationListener(new AnimationListener() {
     		public void onAnimationEnd(Animation anim)
     		{
     			int randomInt = generator.nextInt(heartArray.length());
@@ -97,8 +79,11 @@ public class CandyHearts extends Activity implements AccelerometerListener {
     				randomInt = generator.nextInt(heartArray.length());
     			}
     			
-    			candyHeartImageView.setImageDrawable(heartArray.getDrawable(randomInt));
-    			candyHeartImageView.setAlpha(0);
+    			Drawable drawable = heartArray.getDrawable(randomInt);
+    			    			
+    			candyHeartImageView.setImageDrawable(drawable);
+    			candyHeartImageView.startAnimation(fadeIn);
+    			
     			lastRandomInt = randomInt;
     		}
 
@@ -114,6 +99,69 @@ public class CandyHearts extends Activity implements AccelerometerListener {
 				
 			}
     	});
+    	
+    	enterStageLeft.setAnimationListener(new AnimationListener() {
+    		public void onAnimationEnd(Animation anim)
+    		{
+    			int randomInt = generator.nextInt(heartArray.length());
+    	    	
+    			while(lastRandomInt == randomInt) {
+    				randomInt = generator.nextInt(heartArray.length());
+    			}
+    			
+    			Drawable drawable = heartArray.getDrawable(randomInt);
+    			    			
+    			candyHeartImageView.setImageDrawable(drawable);
+    			candyHeartImageView.startAnimation(enterStageRight);
+    			
+    			lastRandomInt = randomInt;
+    		}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				
+				
+			}
+    	});
+    	
+    	hyperspaceJump.setAnimationListener(new AnimationListener() {
+    		public void onAnimationEnd(Animation anim)
+    		{
+    			
+    			int randomInt = generator.nextInt(heartArray.length());
+    	    	
+    			while(lastRandomInt == randomInt) {
+    				randomInt = generator.nextInt(heartArray.length());
+    			}
+    			
+    			Drawable drawable = heartArray.getDrawable(randomInt);
+    			    			
+    			candyHeartImageView.setImageDrawable(drawable);
+    			
+    			lastRandomInt = randomInt;
+    			
+    			candyHeartImageView.startAnimation(hyperspaceJumpIn);
+    		}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				
+				
+			}
+    	});
+
     }
     
     protected void onDestroy() {

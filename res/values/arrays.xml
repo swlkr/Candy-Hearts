@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="imageHeartArray">
+    <array name="hearts">
     	<item>@drawable/allyours</item>
     	<item>@drawable/asl</item>
     	<item>@drawable/bemine</item>
@@ -24,5 +24,13 @@
     	<item>@drawable/urcute</item>
     	<item>@drawable/urmine</item>
     	<item>@drawable/ymmv</item>
+    </array>
+    <array name="animations">
+    	<item>@anim/enter_stage_right</item>
+    	<item>@anim/enter_stage_left</item>
+    	<item>@anim/fade_in</item>
+    	<item>@anim/fade_out</item>
+    	<item>@anim/hyperspace_jump</item>
+    	<item>@anim/hyperspace_jump_in</item>
     </array>
 </resources>

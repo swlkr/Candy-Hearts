@@ -122,7 +122,7 @@ public class AccelerometerManager {
 			
 			now = System.currentTimeMillis();
 			
-			if(now - lastShaken > 1500) {
+			if(now - lastShaken > 500) {
 			
 				float x = event.values[0];
 			    float y = event.values[1];
@@ -132,7 +132,7 @@ public class AccelerometerManager {
 			    float delta = mAccelCurrent - mAccelLast;
 			    mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 			    
-			    if(mAccel > 6) {
+			    if(mAccel > 2) {
 			    	listener.onShake(mAccel);
 			    	lastShaken = System.currentTimeMillis();
 			    }

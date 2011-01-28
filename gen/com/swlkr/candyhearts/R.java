@@ -9,10 +9,16 @@ package com.swlkr.candyhearts;
 
 public final class R {
     public static final class anim {
-        public static final int hyperspace_jump=0x7f040000;
+        public static final int enter_stage_left=0x7f040000;
+        public static final int enter_stage_right=0x7f040001;
+        public static final int fade_in=0x7f040002;
+        public static final int fade_out=0x7f040003;
+        public static final int hyperspace_jump=0x7f040004;
+        public static final int hyperspace_jump_in=0x7f040005;
     }
     public static final class array {
-        public static final int imageHeartArray=0x7f050000;
+        public static final int animations=0x7f050001;
+        public static final int hearts=0x7f050000;
     }
     public static final class attr {
     }
