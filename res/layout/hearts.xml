@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    xmlns:candyhearts="http://schemas.android.com/apk/res/com.swlkr.candyhearts"
+    >
+    
+    <com.admob.android.ads.AdView
+			android:id="@+id/ad"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			candyhearts:backgroundColor="#000000"
+			candyhearts:primaryTextColor="#FFFFFF"
+			candyhearts:secondaryTextColor="#CCCCCC"
+			candyhearts:refreshInterval="3"
+			/>
+    
+     <ImageView  
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+    	android:id="@+id/image_view"
+        android:scaleType="center"
+        android:src="@drawable/bemine" />
+</LinearLayout>

@@ -45,8 +45,8 @@ public class AccelerometerManager {
 	 */
 	public static boolean isSupported() {
 		if (supported == null) {
-			if (CandyHearts.getContext() != null) {
-				sensorManager = (SensorManager) CandyHearts.getContext().
+			if (Hearts.getContext() != null) {
+				sensorManager = (SensorManager) Hearts.getContext().
 						getSystemService(Context.SENSOR_SERVICE);
 				List<Sensor> sensors = sensorManager.getSensorList(
 						Sensor.TYPE_ACCELEROMETER);
@@ -75,7 +75,7 @@ public class AccelerometerManager {
 	 */
 	public static void startListening(
 			AccelerometerListener accelerometerListener) {
-		sensorManager = (SensorManager) CandyHearts.getContext().
+		sensorManager = (SensorManager) Hearts.getContext().
 				getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> sensors = sensorManager.getSensorList(
 				Sensor.TYPE_ACCELEROMETER);
@@ -132,7 +132,7 @@ public class AccelerometerManager {
 			    float delta = mAccelCurrent - mAccelLast;
 			    mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 			    
-			    if(mAccel > 2) {
+			    if(mAccel > 3) {
 			    	listener.onShake(mAccel);
 			    	lastShaken = System.currentTimeMillis();
 			    }

@@ -5,10 +5,22 @@
     android:layout_height="fill_parent"
     android:background="@color/background"
     >
-     <ImageView  
-        android:layout_width="fill_parent" 
-        android:layout_height="fill_parent" 
-    	android:id="@+id/image_view"
-        android:scaleType="center"
-        android:src="@drawable/bemine" />
+     <TextView 
+			android:id="@+id/main_title_textview"
+			android:text="@string/logo_text" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:textSize="45sp"
+			android:layout_gravity="center_horizontal|top"
+			android:gravity="center_horizontal"
+			android:layout_marginBottom="15dip"
+			android:textColor="@color/red" />
+			
+	<ImageButton android:id="@+id/hearts_button" 
+				android:layout_height="128dip" 
+				android:layout_width="128dip" 
+				android:layout_gravity="center"
+				android:src="@drawable/logobutton"
+				android:layout_marginTop="20dip"
+				android:background="@android:color/transparent" />
 </LinearLayout>
